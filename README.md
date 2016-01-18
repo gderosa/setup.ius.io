@@ -12,5 +12,5 @@ Supports:
 * Red Hat 7
 
 ```
-curl -s setup.ius.io | bash
+curl -s https://setup.ius.io | bash
 ```
