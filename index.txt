@@ -1,4 +1,7 @@
 #!/bin/bash
+yum_install_or_update(){
+   yum -y install ${1} || yum -y update ${1}
+}
 
 el5_download_install(){
 	wget -O /tmp/release.rpm ${1}
@@ -8,15 +11,15 @@ el5_download_install(){
 
 centos_install_epel(){
 	# CentOS has epel release in the extras repo
-	yum -y install epel-release
+	yum_install_or_update epel-release
 	import_epel_key
 }
 
 rhel_install_epel(){
 	case ${RELEASE} in
 		5*) el5_download_install https://dl.fedoraproject.org/pub/epel/epel-release-latest-5.noarch.rpm;;
-		6*) yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm;;
-		7*) yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm;;
+		6*) yum_install_or_update https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm;;
+		7*) yum_install_or_update https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm;;
 	esac
 	import_epel_key
 }
@@ -32,8 +35,8 @@ import_epel_key(){
 centos_install_ius(){
 	case ${RELEASE} in
 		5*) el5_download_install https://centos5.iuscommunity.org/ius-release.rpm;;
-		6*) yum -y install https://centos6.iuscommunity.org/ius-release.rpm;;
-		7*) yum -y install https://centos7.iuscommunity.org/ius-release.rpm;;
+		6*) yum_install_or_update https://centos6.iuscommunity.org/ius-release.rpm;;
+		7*) yum_install_or_update https://centos7.iuscommunity.org/ius-release.rpm;;
 	esac
 	import_ius_key
 }
@@ -41,8 +44,8 @@ centos_install_ius(){
 rhel_install_ius(){
 	case ${RELEASE} in
 		5*) el5_download_install https://rhel5.iuscommunity.org/ius-release.rpm;;
-		6*) yum -y install https://rhel6.iuscommunity.org/ius-release.rpm;;
-		7*) yum -y install https://rhel7.iuscommunity.org/ius-release.rpm;;
+		6*) yum_install_or_update https://rhel6.iuscommunity.org/ius-release.rpm;;
+		7*) yum_install_or_update https://rhel7.iuscommunity.org/ius-release.rpm;;
 	esac
 	import_ius_key
 }
